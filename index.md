@@ -9,7 +9,7 @@ title: Home
       <img src="{{ '/assets/images/me/hero-portrait.jpg?v=3' | relative_url }}" alt="Rasmus Kampmann" onerror="this.src='{{ '/assets/images/me/headshot.jpg' | relative_url }}'" />
     </div>
     <p class="hero-name">Hi, I'm Rasmus Kampmann</p>
-    <h1>Data Analyst &amp; BI Developer</h1>
+    <h1>Data Analyst, BI Developer &amp; AI Automation Specialist</h1>
     <ul class="hero-stack">
       <li>SQL</li>
       <li>Power BI</li>
@@ -144,7 +144,7 @@ title: Home
         <span class="eyebrow">Learn more</span>
         <h2>About Me</h2>
         <p>Hi, I'm Rasmus.</p>
-        <p>I build the infrastructure and analytics that turn scattered commercial data into connected systems and clearer decisions. SQL pipelines, Power BI reporting, web scraping, and AI workflows wired into one system.</p>
+        <p>I build the data infrastructure, BI reporting, and AI automation that turn scattered commercial data into systems leadership can trust. SQL pipelines, Power BI, web scraping, and AI workflows wired into one system.</p>
         <p>Through my work at <strong>Veginova Seeds</strong>, <strong>Sira Logic</strong>, and <strong>Digi-Tal Regnskab</strong>, I've built BI models, automated data pipelines, ML detection systems, and end-to-end GTM infrastructure across sales, finance, operations, production, and ERP sources.</p>
         <p>Most analysts build dashboards on top of someone else's data. I build the infrastructure underneath, so data and AI talk to each other. Analysis is only as reliable as the infrastructure under it. That's why I build both.</p>
         <p><strong>How I work:</strong></p>
