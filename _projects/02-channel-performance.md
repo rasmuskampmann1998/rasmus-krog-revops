@@ -4,7 +4,7 @@ title: Channel Performance & Churn Analysis
 tagline: "Ten acquisition channels treated as one mix. Scored on win rate, sales-rep capacity, speed, and twelve-month churn. Synthetic data, real method."
 description: "Ten acquisition channels scored on win rate, sales-rep capacity, speed, and twelve-month churn. The blended report hid a 12x split between the warm and outbound clusters. Method: star schema in SQL, validation in DuckDB, scorecard in Power BI."
 tools: [Python, SQL, Power BI]
-outcome_headline: "Five warm channels were 21% of deals but 78% of the revenue that survived the first year, with no sales-rep time spent winning them"
+outcome_headline: "Five warm channels were 21% of deals but 78% of the revenue that survived the first year"
 outcome_detail: "The largest channel by volume won 8.6% of the time, consumed 91% of all sales-rep dialer hours, and churned half its customers within twelve months. The scorecard handled the split with a rule, not a model, so the revenue-ops lead could re-run it each quarter without a data team in the room."
 order: 2
 cover_image: /assets/images/projects/channel-performance-cover.png
@@ -13,7 +13,7 @@ github_url: https://github.com/rasmuskampmann1998/rasmus-kampmann-case-studies/t
 
 Built in SQL, Python, and Power BI. Validated in DuckDB. Reproducible from a seeded synthetic generator.
 
-A sales team ran ten acquisition channels and reported them as one blended win rate. Below the blend: win rates from 4.5% (re-bookings) to 79% (referral), twelve-month churn from 4% to 50%, time-to-won from a week to a month. The method was to score each channel on four axes the sales team actually controls, win rate, sales-rep hours consumed, time-to-won, and churn, and let the rule sort them. The deliverable is the scorecard the revenue-operations lead re-runs each quarter to decide where sales-rep capacity goes.
+A sales team ran ten acquisition channels and reported them as one blended win rate. Below the blend: win rates from 4.5% (re-bookings) to 79% (referral), twelve-month churn from 4% to 50%, time-to-won from a week to a month. The method was to score each channel on four axes the sales team actually controls, win rate, auto-dialer hours consumed, time-to-won, and churn, and let the rule sort them. The deliverable is the scorecard the revenue-operations lead re-runs each quarter to decide where sales-rep capacity goes.
 
 The figures are synthetic, generated from a seeded model that reproduces the shape of a real CRM engagement whose data cannot be published. The method is the point.
 
@@ -23,7 +23,7 @@ Schema, scorecard rule, and Power BI model on [GitHub]({{ page.github_url }}).
 
 The revenue-operations lead decides every quarter where sales-rep capacity goes: which channels to invest hours in, which to leave alone. They were making that call from a single blended win rate that flattened the real differences between channels.
 
-The question I had to answer: across ten channels, which return retained revenue per sales-rep hour, which return revenue that leaves within twelve months, and which absorb hours without returning either. The output had to be something the lead could act on without a data team in the room, a ranking they could defend to a CFO and re-run themselves each quarter. That requirement is why the output is a scorecard rule, not a model, and why churn had to be measured alongside win rate.
+The question I had to answer: across ten channels, which return retained revenue per auto-dialer hour, which return revenue that leaves within twelve months, and which absorb dialer hours without returning either. The output had to be something the lead could act on without a data team in the room, a ranking they could defend to a CFO and re-run themselves each quarter. That requirement is why the output is a scorecard rule, not a model, and why churn had to be measured alongside win rate.
 
 ## Where the data came from
 
@@ -57,7 +57,7 @@ I worked at the channel grain because the decision the analysis served was a per
 
 **Win rate.** The base measure: deals won as a share of held meetings. A channel that wins often can still lose money if those customers leave, so this only tells half the story.
 
-**Sales-rep capacity.** Won revenue returned per sales-rep hour spent. The two outbound dialer channels are the only ones that consume rep hours; everything else returns revenue without using the dialer at all. That asymmetry is one of the central findings the scorecard depends on.
+**Sales-rep capacity.** Won revenue returned per auto-dialer hour. Only the two outbound dialer channels consume auto-dialer hours; the other channels still hold meetings, but they do not run through the dialer, so the analysis tracks the dialer as the scarce resource it actually competes for. That asymmetry is one of the central findings the scorecard depends on.
 
 **Time-to-won.** Days from first touch to closed-won. A channel that closes in a week frees a rep's capacity that a channel taking a month does not, which compounds over a quarter.
 
@@ -108,14 +108,21 @@ All four cuts point in the same direction. The channels that win more often and 
 
 The four measures combine into one additive scorecard. Each channel earns points on win rate, sales-rep capacity, time-to-won, and twelve-month retention. The total assigns the channel to one of four bands.
 
-- **Scale** (LinkedIn, referral, inbound, cross-sell, upsell): 21% of deals, 69% of won revenue, **78% of the revenue that survived the first year**, 83% retained at twelve months, no dialer hours consumed. These channels still carry non-dialer costs (paid media, content production, CSM time) which sat outside this analysis. Move sales-rep capacity here first.
+- **Scale** (LinkedIn, referral, inbound, cross-sell, upsell): 21% of deals, 69% of won revenue, **78% of the revenue that survived the first year**, 83% retained at twelve months. Move sales-rep capacity here first.
 - **Maintain** (Facebook, SEO, Instagram): 14% of deals, 7% of won revenue, mid retention. Hold spend, no new investment.
 - **Cap** (cold calling): 60% of deals, 23.5% of won revenue that contracts to 15.7% on a net revenue retention basis, 91% of sales-rep dialer hours, 51% retained at twelve months. The volume is real enough that pulling the channel entirely would leave deals on the table, but the per-hour return does not justify scaling it further. Freeze the channel at current capacity, do not grow it.
 - **Kill** (re-bookings): a 4.5% win rate on 312 deals. Stop it as a standalone motion and fold confirmed reschedules back into the channel that originally booked the meeting.
 
 I built the retention factor as a positive-only bonus rather than a penalty. Win rate and sales-rep capacity already separate the channels into clusters; retention confirms the split rather than driving it. That keeps the rule defensible. It cannot be tilted by one strong quarter on a single measure, and the lead can defend every band assignment by pointing at the underlying numbers.
 
-The scorecard is built so the revenue-operations lead can re-run it each quarter, defend each band to a CFO from the underlying measures, and reassign channels as the mix shifts. The concrete recommendation it produces: move a third of the cold-call SDR capacity to warm-channel follow-up motions, referral nurture, LinkedIn engagement, inbound qualification, where the same hour returns more retained revenue. Retire the standalone re-booking queue. Re-run the scorecard monthly from the same tables, so the bands track the current channel mix rather than last quarter's assumptions.
+The scorecard is built so the revenue-operations lead can re-run it each quarter, defend each band to a CFO from the underlying measures, and reassign channels as the mix shifts.
+
+What the sales team does with this:
+
+- Move a third of the cold-call rep capacity to referral nurture, LinkedIn engagement, and inbound qualification.
+- Freeze cold calling at its current volume. Do not grow it, do not kill it, the volume is real.
+- Stop running re-bookings as a standalone queue; fold confirmed reschedules back into the channel that originally booked the meeting.
+- Re-run the scorecard each quarter from the same tables, before the capacity review.
 
 ## What I'd do differently
 

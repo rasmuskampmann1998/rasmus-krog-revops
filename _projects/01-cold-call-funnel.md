@@ -106,7 +106,14 @@ The findings combine into one additive lead score that gates the dial list. Each
 - Excluded industries (Consulting, Transport, Marketing): a hard negative that zeros the score regardless of company size.
 - Everything else: small or zero weight, because no other field in the dataset showed signal.
 
-There is no "maybe" tier. The data showed one decisive split rather than a smooth curve, so the scorecard has two outcomes, not three. On the historic data the Dial band covers 22.7% of the company list and 83% of the wins: skip three-quarters of the list, keep most of the revenue. I built the scorecard so the sales lead can re-fit the weights each quarter from the same tables and defend every point of the score to a VP from the underlying segment lift, not from a model coefficient. Alongside the scorecard: a meeting-confirmation cadence to address the 43% cancellation loss, and the industry exclusion that removes the three non-fit industries from active dialing. On the original engagement the scorecard gated the next quarter's dial list; the portfolio version reproduces the rule, the bands, and the coverage from the same tables.
+There is no "maybe" tier. The data showed one decisive split rather than a smooth curve, so the scorecard has two outcomes, not three. On the historic data the Dial band covers 22.7% of the company list and 83% of the wins: skip three-quarters of the list, keep most of the revenue. I built the scorecard so the sales lead can re-fit the weights each quarter from the same tables and defend every point of the score to a VP from the underlying segment lift, not from a model coefficient. On the original engagement the scorecard gated the next quarter's dial list; the portfolio version reproduces the rule, the bands, and the coverage from the same tables.
+
+What the sales team does with this:
+
+- Score every company on employee band and industry; only dial the 6-20 band.
+- Drop Consulting, Transport, and Marketing from active dial lists.
+- Add a meeting-confirmation step to recover the deals lost to the 43% cancellation rate.
+- Re-fit the score each quarter from the same tables.
 
 ## What I'd do differently
 
