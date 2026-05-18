@@ -4,13 +4,11 @@ title: Channel Performance & Churn Analysis
 tagline: "Ten acquisition channels treated as one mix. Split apart, scored on win rate, dialer cost, speed, and churn, the biggest channel was the worst. Synthetic data, real method."
 tools: [Python, SQL, Power BI]
 outcome_headline: "Five warm channels were 21% of deals but 78% of the revenue that survived the first year, at zero dialer cost"
-outcome_detail: "The largest channel by volume won 8.6% of the time, carried 91% of all sales-dialer hours, and churned half its customers within twelve months. A four-factor scorecard turned that into a scale-cap-kill capacity decision."
+outcome_detail: "The largest channel by volume won 8.6% of the time, carried 91% of all sales-dialer hours, and churned half its customers within twelve months."
 order: 2
 cover_image: /assets/images/projects/channel-performance-cover.png
-github_url: https://github.com/rasmuskampmann1998/rasmus-kampmann-case-studies/tree/main/02-channel-performance-analysis
+github_url: https://github.com/rasmuskampmann1998/rasmus-skills/tree/main/writing-case-studies/examples/channel-performance-analysis
 ---
-
-Five warm channels were 21% of deals but 78% of the revenue still alive twelve months later, at zero sales-dialer cost. Cold calling, the biggest channel, was 60% of deals, won 8.6%, ate 91% of dialer hours, and churned half its customers within a year.
 
 Built in SQL, Python, and Power BI. Validated in DuckDB. Reproducible from a seeded synthetic generator.
 
@@ -22,7 +20,7 @@ Schema, scorecard rule, and Power BI model on [GitHub]({{ page.github_url }}).
 
 ## The business question
 
-The revenue-operations lead decides every quarter where dialer hours and budget go. They were deciding it on a single blended win rate that hid which channels actually earned the spend.
+The revenue-operations lead decides every quarter where dialer hours and budget go. They were deciding it on a single blended win rate that hid which channels actually earned the spend. The brief was a quarterly cadence: bands reviewed together, the lead reruns the scorecard themselves between reviews, no data team in the loop.
 
 The question: across ten channels, which produces the most won revenue fastest, retains the customers it wins, and where is dialer time being spent that does not come back? The answer had to be something the lead could act on without a data team in the room: a ranking they could defend to a CFO and rerun themselves each quarter. That constraint is why the deliverable is a scorecard, not a model, and why churn had to be in scope alongside win rate.
 
