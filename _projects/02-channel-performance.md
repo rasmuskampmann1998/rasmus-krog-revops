@@ -14,7 +14,7 @@ Built in SQL, Python, and Power BI. Validated in DuckDB. Reproducible from a see
 
 A sales team ran ten acquisition channels and reported them as one blended win rate. Underneath: win rates from 4.5% to 79%, twelve-month churn from 4% to 50%, time-to-won from a week to a month. The blend hid which channels earned their cost and which burned it. The deliverable is a four-factor scorecard a revenue-operations lead reruns each quarter to decide where dialer hours and budget go next.
 
-The figures are synthetic, generated from a seeded model that reproduces the shape of a real Pipedrive engagement whose data cannot be published. The method is the point.
+The figures are synthetic, generated from a seeded model that reproduces the shape of a real CRM engagement whose data cannot be published. The method is the point.
 
 Schema, scorecard rule, and Power BI model on [GitHub]({{ page.github_url }}).
 
@@ -26,9 +26,9 @@ The question: across ten channels, which produces the most won revenue fastest, 
 
 ## Where the data came from
 
-The original engagement ran on a private Pipedrive export from a Danish SMB accounting firm: deals, the activities behind them, the meetings they produced. That export can't be published, so this version runs on a seeded synthetic generator that emits ten CSVs with the same schema and shape. Byte-stable: same script, same data every run. Everything below is the real process on that stand-in.
+The original engagement ran on a private CRM export from a Danish SMB accounting firm: deals, the activities behind them, the meetings they produced. That export can't be published, so this version runs on a seeded synthetic generator that emits ten CSVs with the same schema and shape. Byte-stable: same script, same data every run. Everything below is the real process on that stand-in.
 
-The raw grain mirrors how Pipedrive stores it: one record per deal, separate streams for the touches that created it and the meetings it generated. Three things were not in the raw export and had to be derived: the channel attributed to each deal (first-touch), the sales-dialer hours consumed per deal, and the post-won lifecycle (whether and when a won customer churned). The post-won lifecycle is the column the original reporting never had, and the one that changed the answer.
+The raw grain mirrors how a CRM stores it: one record per deal, separate streams for the touches that created it and the meetings it generated. Three things were not in the raw export and had to be derived: the channel attributed to each deal (first-touch), the sales-dialer hours consumed per deal, and the post-won lifecycle (whether and when a won customer churned). The post-won lifecycle is the column the original reporting never had, and the one that changed the answer.
 
 ## The data model
 
@@ -126,7 +126,7 @@ The same tools most analysts list, but used at a specific step for a specific re
 
 | Step | Tool | What it did here |
 |---|---|---|
-| Sourcing | Pipedrive export (synthetic stand-in via a seeded Python generator) | Deals, touches, and meetings at CRM grain; no private data leaves the original engagement |
+| Sourcing | CRM export (synthetic stand-in via a seeded Python generator) | Deals, touches, and meetings at CRM grain; no private data leaves the original engagement |
 | Modelling | SQL (Postgres-style DDL) | The star schema: three fact grains, seven conformed dimensions, channel as the primary axis |
 | Cleaning and validation | DuckDB | Referential-integrity checks (zero FK orphans), grain dedupe, query validation before any finding |
 | Churn analysis | Python (pandas) | Twelve-month retention curves, net revenue retention, and survival shape by channel group |
