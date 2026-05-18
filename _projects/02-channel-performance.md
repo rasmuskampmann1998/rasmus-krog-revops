@@ -1,13 +1,13 @@
 ---
 layout: project
 title: Channel Performance & Churn Analysis
-tagline: "Ten acquisition channels treated as one mix. Split apart, scored on win rate, dialer cost, speed, and churn, the biggest channel was the worst. Synthetic data, real method."
+tagline: "Ten acquisition channels reported as one blended number. Split apart on win rate, cost, speed, and churn, the biggest channel was the worst. Synthetic data, real method."
 tools: [Python, SQL, Power BI]
 outcome_headline: "Five warm channels were 21% of deals but 78% of the revenue that survived the first year, at zero dialer cost"
 outcome_detail: "The largest channel by volume won 8.6% of the time, carried 91% of all sales-dialer hours, and churned half its customers within twelve months."
 order: 2
 cover_image: /assets/images/projects/channel-performance-cover.png
-github_url: https://github.com/rasmuskampmann1998/rasmus-skills/tree/main/writing-case-studies/examples/channel-performance-analysis
+github_url: https://github.com/rasmuskampmann1998/rasmus-kampmann-case-studies/tree/main/02-channel-performance-analysis
 ---
 
 Built in SQL, Python, and Power BI. Validated in DuckDB. Reproducible from a seeded synthetic generator.

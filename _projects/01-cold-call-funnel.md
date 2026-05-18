@@ -1,18 +1,18 @@
 ---
 layout: project
 title: Cold-Call Funnel Analysis
-tagline: "102,007 dials, 362 wins. The leak was not the top of the funnel. One firmographic band decided almost the entire outcome. Synthetic data, real method."
+tagline: "102,007 dials, 362 wins. The leak was after the first conversation, not before it: one company-size band closed at 37.5%, everyone else at 3.0%. Synthetic data, real method."
 tools: [Python, SQL, Power BI]
 outcome_headline: "Companies with 6 to 20 employees closed held meetings at 37.5%. Everyone else closed at 3.0%, a 12.7x gap on the single biggest lever in the dataset"
 outcome_detail: "Only 12.8% of held meetings became wins, so the pipeline leaked after the first conversation, not before it. The deliverable is an additive lead score that gates the dial list."
 order: 1
 cover_image: /assets/images/projects/cold-call-funnel-cover.png
-github_url: https://github.com/rasmuskampmann1998/rasmus-skills/tree/main/writing-case-studies/examples/full-funnel-analysis
+github_url: https://github.com/rasmuskampmann1998/rasmus-kampmann-case-studies/tree/main/01-cold-call-funnel-analysis
 ---
 
 Built in SQL, Python, and Power BI. Validated in DuckDB. Reproducible from a seeded synthetic generator.
 
-An outbound team ran 102,007 dials through an auto-dialer and judged the operation on call volume. The volume was fine. Underneath it the funnel leaked in one place: only 12.8% of held meetings became wins, and a single firmographic band, companies with 6 to 20 employees, closed at 37.5% while everyone else closed at 3.0%. The decision the analysis served: a sales lead deciding which companies the dialer should call next quarter, who was buying more top-of-funnel volume to fix a problem that was not at the top of the funnel.
+An outbound team ran 102,007 dials through an auto-dialer and judged the operation on call volume. The volume was fine. Underneath it the funnel leaked in one place: only 12.8% of held meetings became wins, and companies with 6 to 20 employees closed at 37.5% while everyone else closed at 3.0%. The sales lead was buying more top-of-funnel volume to fix a problem that was not at the top of the funnel. What the analysis was for: deciding which companies the dialer should call next quarter, and on what basis.
 
 The figures are synthetic, generated from a seeded model that reproduces the shape of a real CRM and auto-dialer engagement whose data cannot be published. The method is the point.
 
@@ -48,7 +48,7 @@ A held meeting counted as cancelled, or the reverse, would move the entire leak.
 
 A deal with more than one meeting must count once, not once per meeting, or a chatty segment looks like it converts more. The meeting and deal streams stay at their own grain and roll up on the deal key before they join, so revenue and win counts are counted once per deal.
 
-The last gate catches the silent error: every analysis figure in this write-up and the dashboard is recomputed from the CSVs by one verification script, and the Power BI measures were checked by definition-equivalence against that same script. The headline measures reproduce it exactly: meeting-to-won 12.8%, the 6-20 band 37.5%, MRR won $278,449. The scorecard band coverage (its share of the universe and of historic wins) comes from applying the documented scoring rule to those same tables, not from the analysis script. If a number moves, the check fails before the chart ships.
+The last gate catches the silent error: every analysis figure in this write-up and the dashboard is recomputed from the CSVs by one verification script, and the Power BI measures were checked by definition-equivalence against that same script. The headline measures reproduce it exactly: meeting-to-won 12.8%, the 6-20 band 37.5%, MRR won $278,449. The scorecard band coverage (its share of the list and of historic wins) comes from applying the documented scoring rule to those same tables, not from the analysis script. If a number moves, the check fails before the chart ships.
 
 ## The approach
 
@@ -105,7 +105,7 @@ The findings collapse into one additive lead score that gates the dial list. Eac
 - Anti-ICP industry (Consulting, Transport, Marketing): a hard negative that zeroes the score regardless of size.
 - Everything else: small or zero weight, because the data showed no other field carries signal.
 
-There is no "maybe" tier. The data has one decisive split, not a gradient, so the scorecard has two outcomes, not three. On the historic data the Dial band is 22.7% of the universe and covers 83% of the wins: skip three-quarters of the list, keep most of the revenue. The scorecard is built so a sales lead can re-fit the weights each quarter from the same tables and defend every point of the score to a VP from the underlying segment lift, not a model coefficient. Alongside it: a meeting-confirmation cadence to attack the 43% cancellation loss, and an industry blacklist that removes the three anti-ICP industries from active dialing.
+There is no "maybe" tier. The data has one decisive split, not a gradient, so the scorecard has two outcomes, not three. On the historic data the Dial band is 22.7% of the list and covers 83% of the wins: skip three-quarters of the list, keep most of the revenue. The scorecard is built so a sales lead can re-fit the weights each quarter from the same tables and defend every point of the score to a VP from the underlying segment lift, not a model coefficient. Alongside it: a meeting-confirmation cadence to attack the 43% cancellation loss, and an industry blacklist that removes the three anti-ICP industries from active dialing. On the original engagement the scorecard gated the next quarter's dial list; the portfolio version reproduces the rule, the bands, and the coverage from the same tables.
 
 ## What I'd do differently
 
